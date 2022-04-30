@@ -1,23 +1,21 @@
-
-import CropDetails from './components/CropDetails';
 import GetCropForm from './components/GetCropForm';
-
 import { useState } from 'react';
 import Button from './components/Button';
-import Map from './components/Map';
+import CustomMap from './components/CustomMap';
+
 
 function App() {
   const[cropDetails,setCropDetails] = useState({})
   const[coordinates,setCoordinates] = useState([])
-  const[activeLocation,setActiveLocation] = useState(true)
  
 
-  const fetchCropData = async (cropName)=>{
+  const fetchCropData = async (cropName,emphasisData)=>{
     const getCropDataUrl = `http://localhost:5000/crops/${cropName}`;
     const response = await fetch(getCropDataUrl);
     const data = await response.json()
 
-    setCropDetails(data)
+    setCropDetails({...data,emphasis:emphasisData})
+    console.log(cropDetails);
   }
 
   const fetchCoordinates = async()=>{
@@ -31,22 +29,11 @@ function App() {
     setCoordinates(data)
   }
 
-  const popupPoint =(point)=>{
-    setActiveLocation(point)
-  }
-
-  
-
   return (
     <div className="container">
       <GetCropForm getCropDetails={fetchCropData}/>
-      <CropDetails cropDetails={cropDetails}/>
       <Button onClick={fetchCoordinates}/>
-      <Map coordinates={coordinates} popupPoint={popupPoint}/>
-      
-
-
-       
+      <CustomMap coordinates={coordinates}/>
     </div>
   );
 }

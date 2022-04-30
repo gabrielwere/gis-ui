@@ -1,6 +1,6 @@
 .leaflet-container
 {
-    width:80%;
+    width:60%;
     height:80vh;
     background-color:lightgrey;
 }
@@ -8,4 +8,4 @@
     background: transparent;
     border: none;
     color:green;
-}  
+}
