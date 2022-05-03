@@ -6,6 +6,7 @@ const SideBar = (props)=>{
 
     const[activeCounty,setActiveCounty] = useState()
     const L = window.L
+    let countyList = []
 
     useEffect(()=>{
         if(activeCounty){
@@ -16,30 +17,33 @@ const SideBar = (props)=>{
                 weight:1
             })
 
-            //constituency layer
-            //add constituency layer after county layer
-            //this will ensure constituencies can be clicked
-            const constituencyLayer = L.geoJSON(constituency,{
-                onEachFeature:(feature,layer)=>{
-                    const constituencyName = feature.properties.CONSTITUEN
-                    layer.bindPopup(constituencyName)
-                }
-            })
+        //constituency layer
+        //add constituency layer after county layer
+        //this will ensure constituencies can be clicked
+        const constituencyLayer = L.geoJSON(constituency,{
+            onEachFeature:(feature,layer)=>{
+                const constituencyName = feature.properties.CONSTITUEN
+                layer.bindPopup(constituencyName)
+            }
+        })
 
-            activeCounty.addTo(props.map)
-            constituencyLayer.addTo(props.map)
+        activeCounty.addTo(props.map)
+        constituencyLayer.addTo(props.map)
 
-            constituencyLayer.setStyle({
-                color:"black",
-                weight:1,
-                fillOpacity:0.1,
-            })
-        }
+        constituencyLayer.setStyle({
+            color:"black",
+            weight:1,
+            fillOpacity:0.1,
+        })
+    }
     },[activeCounty])
 
     const zoomToLayer = (county)=>{
+
+        console.log(county)
+
         //county layer
-        const countyLayer = L.geoJSON(county)
+        const countyLayer =  L.geoJSON(county)
 
         const bboxArray = turfBbox(county)
         const corner1 = [bboxArray[1], bboxArray[0]];
@@ -63,13 +67,22 @@ const SideBar = (props)=>{
     return(
         <div className="sidebar-nav" >
 
-            <span onClick={()=>showKenya()}>KENYA</span>
+            <button className="btn" onClick={()=>showKenya()}>VIEW KENYA</button>
+            <form>
+                <select onChange={ (e)=> zoomToLayer(JSON.parse(e.target.value))}>
+                {
+                    props.counties.features.map((county,index)=>{
+                        countyList.push(county.properties.COUNTY_NAM)
+
+                        county.toString = ()=>{
+                            return JSON.stringify(county)
+                        }
+                        return(<option key ={index} value={county}>{countyList[index]}</option>)
+                    })
+                }
+                </select>
+            </form>
             
-            {
-            props.counties.features.map((county,index)=>{
-                return(<p onClick={()=>zoomToLayer(county)} key={index}>{county.properties.COUNTY_NAM}</p>)
-            })
-            }
         </div>
     )
 }

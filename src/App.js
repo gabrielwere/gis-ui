@@ -1,11 +1,11 @@
 import GetCropForm from './components/GetCropForm';
 import { useState } from 'react';
-import Button from './components/Button';
 import CustomMap from './components/CustomMap';
+import Details from './components/Details';
 
 
 function App() {
-  const[cropDetails,setCropDetails] = useState({})
+  const[cropDetails,setCropDetails] = useState()
   const[coordinates,setCoordinates] = useState([])
  
 
@@ -15,7 +15,6 @@ function App() {
     const data = await response.json()
 
     setCropDetails({...data,emphasis:emphasisData})
-    console.log(cropDetails);
   }
 
   const fetchCoordinates = async()=>{
@@ -31,9 +30,17 @@ function App() {
 
   return (
     <div className="container">
-      <GetCropForm getCropDetails={fetchCropData}/>
-      <Button onClick={fetchCoordinates}/>
-      <CustomMap coordinates={coordinates}/>
+      <div className="cropDetails">
+        <GetCropForm getCropDetails={fetchCropData}/>
+        {
+          cropDetails ? <Details cropName={cropDetails.cropName} emphasis={cropDetails.emphasis} onClick={fetchCoordinates}/>
+          : ''
+        }
+      </div>
+
+      <div>
+        <CustomMap coordinates={coordinates}/>
+      </div>
     </div>
   );
 }

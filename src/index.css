@@ -5,8 +5,24 @@ body {
   padding:0;
   box-shadow:0;
   font-family: 'Poppins', sans-serif;
+  box-sizing:border-box;
 }
-.sidebar-nav
+.container
+{
+  margin: 10px auto;
+  padding: 30px;
+  border-radius: 5px;
+  display:flex;
+}
+.cropDetails
+{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:10px;
+  margin:10px;
+}
+.points
 {
   border:1px solid black;
   margin:10px;
@@ -14,10 +30,117 @@ body {
   max-height:60vh;
   overflow-x:scroll;
 }
+.points span
+{
+  background-color:red;
+}
 .map
 {
   display: flex;
   width:100vw;
 }
+ form
+{
+  display:flex;
+  flex-direction:column;
+  padding:15px;
+  text-align:center;
+}
+.form-control
+{
+  display:flex;
+  flex-direction: column;
+  margin:10px;
+}
+
+.form-control select
+{
+  font-size:15px;
+  text-align:center;
+  cursor: pointer;
+  padding:6px;
+  outline:none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius:4px;
+}
+.form-control label
+{
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  padding:3px;
+}
+.details 
+{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+}
+.details h3
+{
+  letter-spacing: 0.07em;
+}
+.details .details-section
+{
+  margin:10px;
+}
+.details .details-section .title
+{
+  text-transform: capitalize;
+  font-weight:bold;
+  padding:10px;
+  letter-spacing:0.1em;
+}
+.details .details-section .content
+{
+  text-transform: capitalize;
+  letter-spacing: 0.1em;
+}
+.btn
+{
+  display:flex;
+  outline: none;
+  padding:10px;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius:8px;
+  border:1px solid black;
+  background-color:black;
+  color:white;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  display:table-cell;
+  vertical-align:middle;
+}
+.btn:hover
+{
+  background-color:green;
+  color:white;
+}
+.sidebar-nav
+{
+  margin:10px;
+  cursor: pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.sidebar-nav select
+{
+  font-size:15px;
+  text-align:center;
+  cursor: pointer;
+  padding:6px;
+  outline:none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius:4px;
+}
+.popup-content
+{
+  text-align:center;
+  letter-spacing:0.07em;
+}
+
 
 
