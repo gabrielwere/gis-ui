@@ -6,6 +6,12 @@ body {
   box-shadow:0;
   font-family: 'Poppins', sans-serif;
   box-sizing:border-box;
+  /* background-image: url('./img.jpg'); */
+  background-color: lavender;
+  background-repeat: no-repeat;
+  background-position:center center;
+  background-size: cover;
+  overflow-x:hidden;
 }
 .container
 {
@@ -22,13 +28,19 @@ body {
   padding:10px;
   margin:10px;
 }
+.sidebar-points
+{
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+}
 .points
 {
-  border:1px solid black;
+  /* border:1px solid black; */
   margin:10px;
   cursor: pointer;
   max-height:60vh;
-  overflow-x:scroll;
+  overflow-y:scroll;
 }
 .points span
 {

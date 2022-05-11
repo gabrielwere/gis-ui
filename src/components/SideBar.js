@@ -6,7 +6,6 @@ const SideBar = (props)=>{
 
     const[activeCounty,setActiveCounty] = useState()
     const L = window.L
-    let countyList = []
 
     useEffect(()=>{
         if(activeCounty){
@@ -40,8 +39,6 @@ const SideBar = (props)=>{
 
     const zoomToLayer = (county)=>{
 
-        console.log(county)
-
         //county layer
         const countyLayer =  L.geoJSON(county)
 
@@ -72,12 +69,11 @@ const SideBar = (props)=>{
                 <select onChange={ (e)=> zoomToLayer(JSON.parse(e.target.value))}>
                 {
                     props.counties.features.map((county,index)=>{
-                        countyList.push(county.properties.COUNTY_NAM)
 
                         county.toString = ()=>{
                             return JSON.stringify(county)
                         }
-                        return(<option key ={index} value={county}>{countyList[index]}</option>)
+                        return(<option key ={index} value={county}>{county.properties.COUNTY_NAM}</option>)
                     })
                 }
                 </select>
