@@ -2,6 +2,8 @@ import GetCropForm from './components/GetCropForm';
 import { useState } from 'react';
 import CustomMap from './components/CustomMap';
 import Details from './components/Details';
+import Header from './components/Header';
+import NoDetails from './components/NoDetails';
 
 
 function App() {
@@ -29,19 +31,28 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <div className="cropDetails">
-        <GetCropForm getCropDetails={fetchCropData}/>
+    <>
+    <Header/>
+    
+    <div className="crop-form">
+      <GetCropForm getCropDetails={fetchCropData}/>
+    </div>
+
+    
+    <div className="hiro">
+      <div className="crop-container">
         {
-          cropDetails ? <Details cropName={cropDetails.cropName} emphasis={cropDetails.emphasis} onClick={fetchCoordinates}/>
-          : ''
+        cropDetails ?<Details cropName={cropDetails.cropName} emphasis={cropDetails.emphasis} onClick={fetchCoordinates}/>
+        : <NoDetails/>
         }
       </div>
-
-      <div>
-        <CustomMap coordinates={coordinates}/>
-      </div>
+    
+    <CustomMap coordinates={coordinates}/>
     </div>
+    
+  
+        
+    </>
   );
 }
 

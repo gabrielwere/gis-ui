@@ -2,9 +2,15 @@ import { useState } from "react"
 const GetCropForm = (props)=>{
 
     const[cropName,setCropName] = useState('Maize')
-    const[emphasis,setEmphasis] = useState('None')
+    const[emphasis,setEmphasis] = useState('Roads')
 
     const getCropDetails = (e)=>{
+
+        window.scrollBy({
+            top:95,
+            left:0,
+            behavior:'smooth',
+        })
         e.preventDefault();
 
         props.getCropDetails(cropName,emphasis)
@@ -22,7 +28,12 @@ const GetCropForm = (props)=>{
                     <option value="Beans">Beans</option>
                     <option value="French Beans">French Beans</option>
                     <option value="Green Gram">Green Gram</option>
-                    <option value="Bananas">Bananas</option>
+                    <option value="Avocados">Avocados</option>
+                    <option value="Carrots">Carrots</option>
+                    <option value="Cabbages">Cabbages</option>
+                    <option value="Spinach">Spinach</option>
+                    <option value="Peas">Peas</option>
+                    <option value="Onions">Onions</option>
                 </select>
             </div>
             
@@ -32,10 +43,13 @@ const GetCropForm = (props)=>{
                 <select value={emphasis} onChange={(e)=>{
                     setEmphasis(e.target.value)
                 }}>
-                    <option value="none">No emphasis</option>
-                    <option value="roads">Close to Roads</option>
-                    <option value="urban">Close to Urban Areas</option>
-                    <option value="airfields">Close to Airfields</option>
+                    <option value="roads">Roads</option>
+                    <option value="urban">Urban Areas</option>
+                    <option value="airfields">Airfields</option>
+                    <option value="roads&urban">Roads & Urban Areas</option>
+                    <option value="roads&airfields">Roads & Airfields</option>
+                    <option value="urban&airfields">Urban Areas & Airfields</option>
+                    <option value="all three criteria">Roads & Urban & Airfields</option>
                 </select>
             </div>
             

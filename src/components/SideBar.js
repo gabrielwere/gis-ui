@@ -1,10 +1,14 @@
 import turfBbox from "turf-bbox"
 import { useState,useEffect } from "react"
 import constituency from '../data/constituencies.json'
+import leafletPip from "@mapbox/leaflet-pip"
+import county from '../data/counties.json'
 
 const SideBar = (props)=>{
 
     const[activeCounty,setActiveCounty] = useState()
+  
+
     const L = window.L
 
     useEffect(()=>{
@@ -19,17 +23,17 @@ const SideBar = (props)=>{
         //constituency layer
         //add constituency layer after county layer
         //this will ensure constituencies can be clicked
-        const constituencyLayer = L.geoJSON(constituency,{
+        const countyLayer = L.geoJSON(county,{
             onEachFeature:(feature,layer)=>{
-                const constituencyName = feature.properties.CONSTITUEN
-                layer.bindPopup(constituencyName)
+                const countyName = feature.properties.COUNTY_NAM
+                layer.bindPopup(countyName)
             }
         })
 
         activeCounty.addTo(props.map)
-        constituencyLayer.addTo(props.map)
+        countyLayer.addTo(props.map)
 
-        constituencyLayer.setStyle({
+        countyLayer.setStyle({
             color:"black",
             weight:1,
             fillOpacity:0.1,
@@ -41,6 +45,7 @@ const SideBar = (props)=>{
 
         //county layer
         const countyLayer =  L.geoJSON(county)
+        const targetCountyName = county.properties.COUNTY_NAM
 
         const bboxArray = turfBbox(county)
         const corner1 = [bboxArray[1], bboxArray[0]];
@@ -55,6 +60,23 @@ const SideBar = (props)=>{
         }
         
         setActiveCounty(countyLayer)
+
+        //ugly code!!!
+        if(props.points.length > 0){
+
+            let countyArray = []
+            props.points.map((point)=>{
+                const layer1 = leafletPip.pointInLayer([point.longitude,point.latitude],countyLayer)
+
+                if(layer1[0] != undefined && layer1[0].feature.properties.COUNTY_NAM===targetCountyName){
+                    countyArray.push(layer1[0].feature.properties.COUNTY_NAM)
+                }
+            })
+
+            if(countyArray.length <= 0){
+                window.alert('No points found in '+targetCountyName)
+            }
+        }
     }
 
     const showKenya = ()=>{
@@ -78,7 +100,9 @@ const SideBar = (props)=>{
                 }
                 </select>
             </form>
-            
+            <div>
+
+            </div>
         </div>
     )
 }

@@ -1,11 +1,12 @@
 .leaflet-container
 {
-    width:45%;
+    width:50%;
     height:80vh;
     background-color:lightgrey;
+    margin-right:30px;
 }
 .leaflet-div-icon {
     background: transparent;
     border: none;
-    color:green;
+    /* color:green; */
 }
