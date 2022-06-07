@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# GIS UI
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Design
 
-### `npm test`
+![Screenshot of the user interface](/design.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What it is
 
-### `npm run build`
+This is the user interface for  a GIS application which given a crop and a user selected criteria,it should display locations in Kenya where the crop can be grown,in order of suitability i.e the best points are shown first.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How it works
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* You choose a crop<br>(Check out [this repository](https://github.com/gabrielwere/knowledge-base-connector) to see where the crop data is stored)
+* Select criteria<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - What this means is that,the points will be sorted in order of     proximity to the criterion chosen.
+    - Available criteria:
 
-### `npm run eject`
+        * Roads
+        * Urban Areas
+        * Airfields
+        * Roads & Urban Areas
+        * Roads & Airfields
+        * Urban Areas & Airfields
+        * Roads,Urban Areas & Airfields
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    - Take `roads` for example,suppose `roads` is chosen as the criteria,the locations displayed first will be locations which have enough rainfall,good soil and optimum temperature to grow the selected crop and are closest to roads.<br>
+    Check out [this repository](https://github.com/gabrielwere/agricultural-decision-maker-api) to see how the rainfall,soil and temperature data is stored as well as how the locations are sorted.
+* After confirming the details,click the `GET COORDINATES` button after which the points will be displayed,as shown below :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Sample image
+![Screenshot of the results](/results.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technologies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. React.
+2. React Leaflet.
+3. Leaflet.
+4. Leaflet-geometryutil.
+5. React Icons.
+6. Turf Bbox.
+7. Mapbox/leaflet-pip
 
-## Learn More
+Check `package.json` for more details on the dependencies.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Additional information
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Check out the [Agricultural Decision Maker API](https://github.com/gabrielwere/agricultural-decision-maker-api) and the [Knowledge Base Connector](https://github.com/gabrielwere/knowledge-base-connector) repositories as they are utilised by this user interface.<br>
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## BTW
+My project supervisor thought my design sucked...I agreed(actually, she thought the  whole project sucked...I disagreed).
